@@ -1,0 +1,32 @@
+name: Demo QA
+
+on:
+  push:
+    branches: [main, feat/full-winning-demo]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate JavaScript syntax
+        run: node --check app.js
+      - name: Validate required demo routes and flows
+        run: |
+          grep -q "renderDashboard" app.js
+          grep -q "renderAssessment" app.js
+          grep -q "renderSummary" app.js
+          grep -q "renderAccess" app.js
+          grep -q "renderAdmin" app.js
+          grep -q "renderIntegration" app.js
+          grep -q "reset-demo" app.js
+      - name: Validate core assets
+        run: |
+          test -s index.html
+          test -s styles.css
+          test -s vercel.json
