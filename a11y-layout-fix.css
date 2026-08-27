@@ -1,0 +1,102 @@
+/* Accessibility typography fix — keep A+ useful without breaking navigation/layout. */
+
+/* The original A+ rule scaled the entire body and then enlarged nav/table text again.
+   That made the fixed-height top bar wrap/overflow. Keep application chrome fixed and
+   enlarge only user-facing content. */
+body.large-text {
+  font-size: 16px;
+}
+
+/* Stable application chrome */
+body.large-text .topbar {
+  height: 76px;
+  min-height: 76px;
+  font-size: 16px;
+}
+body.large-text .brand-copy strong { font-size: 15px; line-height: 1.25; }
+body.large-text .brand-copy span { font-size: 12px; line-height: 1.35; }
+body.large-text .nav { flex-wrap: nowrap; }
+body.large-text .nav a,
+body.large-text .nav button {
+  font-size: 13px;
+  line-height: 1.2;
+  padding: 9px 9px;
+  white-space: nowrap;
+}
+body.large-text .top-actions { font-size: 16px; }
+body.large-text .demo-badge { font-size: 11px; white-space: nowrap; }
+body.large-text .icon-control { font-size: 13px; }
+
+/* Board controller must sit below the real 76px sticky header. */
+.board-controller { top: 76px; }
+body.large-text .board-controller { font-size: 16px; }
+body.large-text .board-story-copy strong { font-size: 12px; }
+body.large-text .board-story-copy span { font-size: 11px; }
+body.large-text .board-story-actions .btn { font-size: 12px; }
+
+/* Content-only enlargement. Keep dense data/UI elements compact enough to preserve layout. */
+body.large-text .section-head p,
+body.large-text .hero .lede {
+  font-size: 17px;
+  line-height: 1.65;
+}
+body.large-text .policy-card p { font-size: 15px; line-height: 1.75; }
+body.large-text .indicator-card p,
+body.large-text .list-card ul,
+body.large-text .alert p,
+body.large-text .muted { font-size: 13px; line-height: 1.6; }
+body.large-text .assess-option p { font-size: 12px; line-height: 1.55; }
+body.large-text .field label,
+body.large-text .stat-card span { font-size: 13px; }
+body.large-text .stat-card small { font-size: 12px; }
+body.large-text .badge { font-size: 11px; }
+body.large-text .quick-category > span,
+body.large-text .quick-category button { font-size: 11px; }
+body.large-text .learning-meta span { font-size: 10px; }
+body.large-text .score-explainer span { font-size: 11px; }
+body.large-text .score-explainer small { font-size: 10px; }
+body.large-text .management-links strong { font-size: 12px; }
+body.large-text .management-links span { font-size: 10px; }
+body.large-text .smoke-item strong { font-size: 10px; }
+body.large-text .smoke-item small { font-size: 9px; }
+body.large-text .video-check strong,
+body.large-text .video-check span { font-size: 10px; }
+
+/* Tables must not jump to ~19px when A+ is enabled. */
+body.large-text .admin-table th,
+body.large-text .admin-table td,
+body.large-text .report-table th,
+body.large-text .report-table td {
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+/* Give enlarged content more room instead of forcing four narrow columns. */
+body.large-text .grid-4,
+body.large-text .management-links,
+body.large-text .smoke-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Defensive header behavior for narrower presentation/browser windows. */
+@media (max-width: 1280px) {
+  .topbar { padding-left: 18px; padding-right: 18px; gap: 10px; }
+  .brand-wrap { min-width: 220px; }
+  .top-actions { min-width: auto; }
+  .nav a, .nav button { padding-left: 8px; padding-right: 8px; font-size: 12px; }
+  body.large-text .nav a,
+  body.large-text .nav button { font-size: 12px; padding-left: 7px; padding-right: 7px; }
+}
+
+@media (max-width: 1000px) {
+  body.large-text .grid-4,
+  body.large-text .management-links,
+  body.large-text .smoke-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 700px) {
+  .board-controller { top: 0; }
+  body.large-text .grid-4,
+  body.large-text .management-links,
+  body.large-text .smoke-grid { grid-template-columns: 1fr; }
+}
