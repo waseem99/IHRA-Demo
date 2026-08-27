@@ -2,7 +2,7 @@ name: Demo QA
 
 on:
   push:
-    branches: [main, feat/full-winning-demo]
+    branches: [main, feat/full-winning-demo, ai/winning-demo-upgrade]
   pull_request:
     branches: [main]
 
@@ -15,7 +15,9 @@ jobs:
         with:
           node-version: '20'
       - name: Validate JavaScript syntax
-        run: node --check app.js
+        run: |
+          node --check app.js
+          node --check winning-upgrade.js
       - name: Validate required demo routes and flows
         run: |
           grep -q "renderDashboard" app.js
@@ -25,8 +27,22 @@ jobs:
           grep -q "renderAdmin" app.js
           grep -q "renderIntegration" app.js
           grep -q "reset-demo" app.js
+          grep -q "Board Demo" winning-upgrade.js
+          grep -q "renderAssessor" winning-upgrade.js
+          grep -q "renderReconciliation" winning-upgrade.js
+          grep -q "renderIndicatorConfig" winning-upgrade.js
+          grep -q "renderProduction" winning-upgrade.js
+          grep -q "renderAudit" winning-upgrade.js
+          grep -q "renderReport" winning-upgrade.js
+          grep -q "runSmokeCheck" winning-upgrade.js
+      - name: Validate upgrade assets are loaded
+        run: |
+          grep -q "winning-upgrade.css" index.html
+          grep -q "winning-upgrade.js" index.html
       - name: Validate core assets
         run: |
           test -s index.html
           test -s styles.css
+          test -s winning-upgrade.css
+          test -s winning-upgrade.js
           test -s vercel.json

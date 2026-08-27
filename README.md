@@ -100,3 +100,14 @@ See [`assets/videos/README.md`](assets/videos/README.md).
 - Exact MSDS wording in the demo dataset is preserved from the supplied demonstration material.
 
 See [`docs/WINNING_DEMO_PLAN.md`](docs/WINNING_DEMO_PLAN.md) for the original demo strategy and acceptance checklist.
+
+## AI-first winning upgrade workstream
+
+The next implementation cycle is planned on branch `ai/winning-demo-upgrade`.
+
+Use these as the source of truth for the upgrade:
+
+- [`docs/AI_FIRST_WINNING_DEMO_UPGRADE.md`](docs/AI_FIRST_WINNING_DEMO_UPGRADE.md) — complete upgrade strategy, architecture, priorities and acceptance criteria.
+- [`docs/IMPLEMENTATION_BACKLOG.md`](docs/IMPLEMENTATION_BACKLOG.md) — ordered implementation checklist and merge gate.
+
+The workstream prioritizes guided Board Story Mode, dynamic HCE personalization, stronger red-flag propagation, payment/reconciliation traceability, IHRA Assessor Mode, live admin configuration, readiness reporting and a 303-indicator production tracker while preserving the current static/Vercel-safe prototype architecture.
